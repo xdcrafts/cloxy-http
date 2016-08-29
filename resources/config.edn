@@ -1,0 +1,28 @@
+{:jetty {:port                 8090   ;; - the port to listen on (defaults to 80)
+         ;:host                 nil    ;; - the hostname to listen on
+         :join?                false  ;; - blocks the thread until server ends (defaults to true)
+         :daemon?              true   ;; - use daemon threads (defaults to false)
+         :http?                true   ;; - listen on :port for HTTP traffic (defaults to true)
+         ;:ssl?                 false  ;; - allow connections over HTTPS
+         ;:ssl-port             443    ;; - the SSL port to listen on (defaults to 443, implies :ssl? is true)
+         ;:exclude-ciphers      nil    ;; - When :ssl? is true, exclude these cipher suites
+         ;:exclude-protocols    nil    ;; - When :ssl? is true, exclude these protocols
+         ;:keystore             nil    ;; - the keystore to use for SSL connections
+         ;:key-password         nil    ;; - the password to the keystore
+         ;:truststore           nil    ;; - a truststore to use for SSL connections
+         ;:trust-password       nil    ;; - the password to the truststore
+         :max-threads          50     ;; - the maximum number of threads to use (default 50)
+         :min-threads          8      ;; - the minimum number of threads to use (default 8)
+         :max-idle-time        200000 ;; - the maximum idle time in milliseconds for a connection (default 200000)
+         :client-auth          :none  ;; - SSL client certificate authenticate, may be set to :need,:want or :none (defaults to :none)
+         :send-date-header?    true   ;; - add a date header to the response (default true)
+         :output-buffer-size   32768  ;; - the response body buffer size (default 32768)
+         :request-header-size  8192   ;; - the maximum size of a request header (default 8192)
+         :response-header-size 8192   ;; - the maximum size of a response header (default 8192)
+         :send-server-version? true}  ;; - add Server header to HTTP response (default true)}
+         ;:configurator         nil}    ;; - a function called with the Jetty Server instance
+
+ :delegate {:host "localhost"
+            :port 8080}}
+
+

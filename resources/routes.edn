@@ -1,0 +1,2 @@
+["/" [["version" cloxy-http.handlers/version]
+      [true cloxy-http.handlers/delegate]]]
