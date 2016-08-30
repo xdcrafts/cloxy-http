@@ -26,3 +26,6 @@
 
 (defn delegate []
   (:delegate conf))
+
+(defn handler []
+  (:handler conf))

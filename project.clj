@@ -18,4 +18,5 @@
                  [ring/ring-core  "1.5.0"]
                  [ring/ring-defaults  "0.2.1"]
                  [ring/ring-jetty-adapter "1.5.0"]
+                 [ring-logger-timbre "0.7.5"]
                  [bidi "2.0.9"]])
