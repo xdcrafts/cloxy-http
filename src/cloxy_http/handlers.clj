@@ -1,9 +1,8 @@
 (ns cloxy-http.handlers
-  (:require [mount.core :as mount]
-            [cloxy-http.conf :as conf]
-            [clj-http.core :as client]))
-
-;; todo configure http client
+  (:require [mount.core :as m]
+            [clj-http.core :as h]
+            [cloxy-http.tools.conf :as c]
+            [cloxy-http.tools.http.client.connection-manager :as cm]))
 
 (defn- re-route-request [req server-name server-port]
   (-> req
@@ -20,6 +19,11 @@
        (map (fn [entry] {:name (first entry) :content (second entry)}))
        vec))
 
+(defn- with-http-client-configuration [request]
+  (-> request
+      (into (c/http-client-request))
+      (into {:connection-manager cm/connection-manager})))
+
 (defn delegate-handler-to [server-name server-port]
   (fn [req]
     (let [multipart (:multipart-params req)
@@ -33,13 +37,14 @@
                                 (assoc :multipart multipart-content)
                                 (assoc :headers headers)))
                           (-> delegated-req-draft
-                              (assoc :body (slurp (:body req)))))]
-      (client/request delegated-req))))
+                              (assoc :body (slurp (:body req)))))
+          delegated-req-wtih-conf (with-http-client-configuration delegated-req)]
+      (h/request delegated-req-wtih-conf))))
 
 (defn service-unavailable [req] {:status 503})
 
-(mount/defstate delegate :start (delegate-handler-to (:host (conf/delegate)) (:port (conf/delegate)))
-                         :stop service-unavailable)
+(m/defstate delegate :start (delegate-handler-to (:host (c/delegate)) (:port (c/delegate)))
+            :stop service-unavailable)
 
 (defn version [req] {:status 200
                      :headers {"Content-Type" "text/html"}

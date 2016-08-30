@@ -21,6 +21,11 @@
          :response-header-size 8192   ;; - the maximum size of a response header (default 8192)
          :send-server-version? true}  ;; - add Server header to HTTP response (default true)}
          ;:configurator         nil}    ;; - a function called with the Jetty Server instance
+ :http-client {:connection-manager {:timeout 5
+                                    :threads 5
+                                    :default-per-route 5}
+               :request {:conn-timeout 5
+                         :conn-request-timeout 5}}
  :handler {:log-requests false}
  :delegate {:host "localhost"
             :port 8080}}

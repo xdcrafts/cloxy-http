@@ -1,23 +1,23 @@
 (ns cloxy-http.server
   "This namespace contains definition of Jetty service"
-  (:require [mount.core :as mount]
-            [cloxy-http.conf :as conf]
-            [cloxy-http.routes :as routes]
-            [ring.adapter.jetty :as jetty]
-            [ring.middleware.defaults :as defaults]
-            [ring.logger.timbre :as logger]
-            [bidi.ring :as bidi]))
+  (:require [mount.core :as m]
+            [cloxy-http.tools.conf :as c]
+            [cloxy-http.routes :as r]
+            [ring.adapter.jetty :as j]
+            [ring.middleware.defaults :as d]
+            [ring.logger.timbre :as l]
+            [bidi.ring :as b]))
 
 (defn- make-handler []
-  (let [handler (-> routes/routes
-                    bidi/make-handler
-                    (defaults/wrap-defaults
-                      (assoc-in defaults/site-defaults [:security :anti-forgery] false)))]
-    (if (:log-requests (conf/handler))
-      (logger/wrap-with-logger handler)
+  (let [handler (-> r/routes
+                    b/make-handler
+                    (d/wrap-defaults
+                      (assoc-in d/site-defaults [:security :anti-forgery] false)))]
+    (if (:log-requests (c/handler))
+      (l/wrap-with-logger handler)
       handler)))
 
 
-(mount/defstate server
-  :start (jetty/run-jetty (make-handler) (conf/jetty))
-  :stop (.stop server))
+(m/defstate server
+            :start (j/run-jetty (make-handler) (c/jetty))
+            :stop (.stop server))

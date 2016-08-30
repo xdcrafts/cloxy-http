@@ -1,5 +1,5 @@
-(ns cloxy-http.pid
-  (:require [clojure.string :as string])
+(ns cloxy-http.tools.pid
+  (:require [clojure.string :as s])
   (:import (java.lang.management ManagementFactory)
            (java.io File)))
 
@@ -7,7 +7,7 @@
  (memoize (fn []
             (-> (ManagementFactory/getRuntimeMXBean)
                 .getName
-                (string/split #"@")
+                (s/split #"@")
                 first))))
 
 (defn pid-file! [file-name]
