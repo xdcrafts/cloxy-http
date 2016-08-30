@@ -9,6 +9,8 @@
   :plugins [[lein-environ "1.1.0"]]
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/tools.namespace "0.2.11" :scope "provided"]
+                 [com.taoensso/timbre "4.7.4"]
+                 [com.fzakaria/slf4j-timbre "0.3.2"]
                  [mount "0.1.10"]
                  [environ "1.1.0"]
                  [aero "1.0.0"]

@@ -1,5 +1,5 @@
 (ns cloxy-http.server
-  "This namespace contains definition of Netty service"
+  "This namespace contains definition of Jetty service"
   (:require [mount.core :as mount]
             [cloxy-http.conf :as conf]
             [cloxy-http.routes :as routes]
