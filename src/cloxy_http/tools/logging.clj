@@ -20,4 +20,4 @@
 (configure-logging)
 
 (m/defstate logging-conf :start (configure-logging)
-            :stop {})
+                         :stop {})

@@ -1,6 +1,7 @@
 (ns cloxy-http.core
   (:gen-class)
   (:require [mount.core :as m]
+            [mount.tools.graph :as mg]
             [cloxy-http.tools.logging :as l]
             [cloxy-http.tools.pid :as p]
             [cloxy-http.routes :as r]
